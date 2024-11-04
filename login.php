@@ -1,3 +1,31 @@
+<?php 
+    if($_SERVER['REQUEST_METHOD']=='POST'){
+        if (isset($_POST['name']) & isset($_POST['password'])){
+            $name = $_POST['name'];
+            $password = $_POST['password'];
+            if ($name== 'admin' & $password == 'admin'){
+            session_name('login');
+            session_start();
+            $_SESSION['name'] = $name;
+
+
+            header('Location:index.php');
+
+            }
+
+    }
+}
+
+
+
+
+
+
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -17,7 +45,7 @@
             <img id='logo' src="assets\Nasa_logo.svg" alt="Logo Nasa">
         </div>
         <div class="form">
-            <form action="" method="post">
+            <form action="login.php" method="post">
                 <label for="name">Usuario</label>
                 <input type="text" name="name" id="name" placeholder="Name">
                 <label for="password">Password</label>
