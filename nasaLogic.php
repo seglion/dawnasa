@@ -1,6 +1,8 @@
 
 <?php
-$user = "Miguel";
+
+
+
 
 // Añadir el token
 $token = "vVmYQi60cVFeW1ncYHXQTLj9O3pYCSRreLtrOnIs";
@@ -29,6 +31,30 @@ $context = stream_context_create($options);
 // Hacer la solicitud  asteroides 
 $request = @file_get_contents($url_ast);
 $jsonAsteorides = json_decode($request);
+
+function meteorWarning(object $object,string $fecha){
+    $asteroides = new stdClass();
+    $asteroides->warnings=0;
+    $warnAste=array();
+    foreach( $object->near_earth_objects->{$fecha} as $element){
+
+        if($element->is_potentially_hazardous_asteroid == true){
+            $warnAste[$asteroides->warnings] = new stdClass();
+            $warnAste[$asteroides->warnings]->name = $element->name;
+            $warnAste[$asteroides->warnings]->diameter = $element->estimated_diameter->kilometers->estimated_diameter_max;
+            $warnAste[$asteroides->warnings]->velocity = $element->close_approach_data[0]->relative_velocity->kilometers_per_second;
+            $warnAste[$asteroides->warnings]->distance =$element->close_approach_data[0]->miss_distance->lunar;
+            $warnAste[$asteroides->warnings]->orbit =$element->close_approach_data[0]->orbiting_body;
+            $asteroides->warnings++;
+        }
+    }
+    $asteroides->warnAste = $warnAste;
+    
+    return $asteroides;
+}
+
+$asteroides = meteorWarning($jsonAsteorides,$fecha);
+
 
 
 

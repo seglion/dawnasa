@@ -24,25 +24,39 @@ $jsonAsteroides= json_decode($request);
 
 print_r($jsonAsteroides->element_count);
 
-
-$warnings=0;
+$asteroides = new stdClass();
+$asteroides->warnings=0;
+$warnAste=array();
 foreach($jsonAsteroides->near_earth_objects->{$fecha} as $element){
-print_r("<br/>");
-print_r($element->name);
-print_r("<br/>");
-print_r($element->estimated_diameter->kilometers->estimated_diameter_max);
-print_r("<br/>");
-print_r($element->close_approach_data[0]->relative_velocity->kilometers_per_second." km/s");
-print_r("<br/>");
-print_r($element->close_approach_data[0]->miss_distance->lunar." lunar");
-print_r("<br/>");
 
-if($element->is_potentially_hazardous_asteroid== true){
-    $warnings++;
+    if($element->is_potentially_hazardous_asteroid == true){
+        $warnAste[$asteroides->warnings] = new stdClass();
+        $warnAste[$asteroides->warnings]->name = $element->name;
+        $warnAste[$asteroides->warnings]->diameter = $element->estimated_diameter->kilometers->estimated_diameter_max;
+        $warnAste[$asteroides->warnings]->velocity = $element->close_approach_data[0]->relative_velocity->kilometers_per_second;
+        $warnAste[$asteroides->warnings]->distance =$element->close_approach_data[0]->miss_distance->lunar;
+        $asteroides->warnings++;
+    }
 }
-}
+
+
+
+foreach($warnAste as $element){print_r("<br/>");
+    print_r($element->name);
+    print_r("<br/>");
+    print_r($element->diameter);
+    print_r("<br/>");
+    print_r($element->velocity." km/s");
+    print_r("<br/>");
+    print_r($element->distance." lunar");
+    print_r("<br/>");}
+
+
+
+
+
 print_r("<br/>");
-print_r($warnings);
+print_r($asteroides->warnings);
 
 
 

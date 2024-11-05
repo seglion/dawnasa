@@ -52,10 +52,28 @@ require("nasaLogic.php");
 
             </div>
             <div class="totalmeteor">
-                <p>Numero asteroides = 0</p>
-                <br>
-                <p>Peligrosos = 0</p>
+                <h4>Numero asteroides = <?php echo($jsonAsteorides ->element_count)?></h4>
+                <h4>Peligrosos = <?php echo($asteroides->warnings)?></h4>
             </div>
+            <?php
+            
+            if($asteroides->warnings>0){
+
+                foreach($asteroides->warnAste as $ast) {
+                    echo("<div class='warMet'>
+                        <h4> $ast->name </h4>
+                        <h5>Diametro: " . number_format($ast->diameter, 2) . " </h5>
+                        <h5>Velocidad: " . number_format($ast->velocity, 2) . " Km/s</h5>
+                        <h5>Distancia: " . number_format($ast->distance, 2) . " Lunar</h5>
+                        <h5>Orbita: " . $ast->orbit . "</h5>
+                        </div>");
+                }
+        }
+            
+            
+            ?>
+            
+
         </aside>
         <main>
             <?php

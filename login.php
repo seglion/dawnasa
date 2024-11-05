@@ -1,18 +1,16 @@
-<?php 
-    if($_SERVER['REQUEST_METHOD']=='POST'){
-        if (isset($_POST['name']) & isset($_POST['password'])){
-            $name = $_POST['name'];
-            $password = $_POST['password'];
-            if ($name== 'admin' & $password == 'admin'){
+<?php
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (isset($_POST['name']) & isset($_POST['password'])) {
+        $name = $_POST['name'];
+        $password = $_POST['password'];
+        if ($name == 'admin' & $password == 'admin') {
             session_name('login');
             session_start();
             $_SESSION['name'] = $name;
 
 
             header('Location:index.php');
-
-            }
-
+        }
     }
 }
 

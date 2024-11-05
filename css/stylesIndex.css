@@ -113,14 +113,11 @@ p {
 
 
 .totalmeteor{
-    display: flex;
-    background-color: coral;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 5px;
-    border-radius: 5px;
-    margin-top:30px;
+    width: 90%;
+    margin: 0 auto;
+    border-radius: 10px;
+    justify-items: center;
+    padding: 10px;
 }
 
 #meteor {
@@ -130,6 +127,16 @@ p {
     transform-origin: center;
     margin-top:30px;
 }
+
+.warMet{
+    background-color: coral;
+    border-radius: 10px;
+    margin: 0 auto;
+    text-align: center;
+    width: 90%;
+    margin: 0 auto;  
+}
+
 
 @keyframes rotateMeteor {
     0% {
