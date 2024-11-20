@@ -68,13 +68,24 @@ $json = json_decode($request);
 
 
 // Obtener los encabezados HTTP y el límite de peticiones
+
 $headers = $http_response_header;
+
+
 $totallimit = explode(":", $headers[15])[1];
 $remainRequest = explode(":", $headers[16])[1];
-$usedRequest = $totallimit - $remainRequest;
 
 
 
+if (!isset($_COOKIE['usedRequest'])) {
+    // Si la cookie no existe, establece su valor inicial a 1 y duración de 1 día
+    setcookie('usedRequest', 1, time() + 3600); 
+    $usedRequest = 1;
+} else {
+    // Si la cookie ya existe, incrementa el valor y establece la cookie de nuevo
+    $usedRequest = $_COOKIE['usedRequest'] + 1;
+    setcookie('usedRequest', $usedRequest);
+}
 
 
 

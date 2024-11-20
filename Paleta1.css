@@ -1,0 +1,21 @@
+:root{
+
+    --DeepSpace1:#112c50;
+    --DeepSpace2:#5b58EB;
+    --DeepSpace3:#BB63FF;
+    --DeepSpace4:#56E1E9;
+    --DeepSpace5:#0A2353;
+
+    --DeepSpace1:#112c50;
+    --DeepSpace2:#5b58EB;
+    --DeepSpace3:#BB63FF;
+    --DeepSpace4:#56E1E9;
+    --DeepSpace5:#0A2353;
+
+
+}
+
+
+body{background: linear-gradient(217deg, var(--DeepSpace1), rgba(255,0,0,0) 70.71%),
+    linear-gradient(127deg, var(--DeepSpace2), rgba(0,255,0,0) 70.71%),
+    linear-gradient(336deg, var(--DeepSpace3), rgba(0,0,255,0) 70.71%);}
