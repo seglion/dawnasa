@@ -1,4 +1,4 @@
-<!-- index.php -->
+
 <?php 
 require("auth.php");
 require("nasaLogic.php");

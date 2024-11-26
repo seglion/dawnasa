@@ -1,16 +1,42 @@
 <?php
+require('database.php');
+
+
+
+
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+
+
+
+
     if (isset($_POST['name']) & isset($_POST['password'])) {
         $name = $_POST['name'];
         $password = $_POST['password'];
-        if ($name == 'admin' & $password == 'admin') {
-            session_name('login');
-            session_start();
-            $_SESSION['name'] = $name;
+        $stmt = $con->prepare("SELECT * FROM users WHERE username = :name ");
+
+        $stmt->execute([':name' => $name]);
+
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+       
+        if($user){
 
 
-            header('Location:index.php');
+            if (password_verify($password, $user['password'])) {
+                session_name('login');
+                session_start();
+                $_SESSION['name'] = $name;
+                $_SESSION['token'] = $user['token'];
+                // Redirige al usuario.
+                header('Location: index.php');
+                
+            } 
+
+
         }
+
     }
 }
 

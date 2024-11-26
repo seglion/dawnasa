@@ -14,7 +14,7 @@ $fileName = basename($imageUrl);
 header("Content-Type: application/octet-stream");
 header("Content-Disposition: attachment; filename=\"$fileName\"");
 
-// Abre el flujo de la URL y envía los datos al navegador
+// Abre el flujo de la URL y envía los datos al navegador.
 $fp = fopen($imageUrl, 'rb');
 if ($fp === false) {
     die("Error al abrir la imagen.");

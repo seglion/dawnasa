@@ -5,9 +5,9 @@
 
 
 // Añadir el token
-$token = "vVmYQi60cVFeW1ncYHXQTLj9O3pYCSRreLtrOnIs";
+$token = $_SESSION['token'];
 $fecha = isset($_GET['calendar']) ? $_GET['calendar'] : date('Y-m-d');
-var_dump($fecha);
+
 // URL del APOD
 $url = "https://api.nasa.gov/planetary/apod?api_key=" . $token. "&date=".$fecha;
 //URL de los asteroides

@@ -1,3 +1,33 @@
+<?php
+require('database.php');
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if (isset($_POST['name']) & isset($_POST['password']) & isset($_POST['conpassword']) & isset($_POST['token'])) {
+        $name = $_POST['name'];
+        $password = $_POST['password'];
+        $conpassword = $_POST['conpassword'];
+        $token = $_POST['token'];
+        if ($password == $conpassword) {
+            $hashPass = password_hash($password, PASSWORD_DEFAULT);
+            $stmt = $con->prepare("INSERT INTO users (username, password, token) VALUES (:name, :password, :token)");
+            
+                $stmt->execute([
+                    ':name' => $name,
+                    ':password' => $hashPass,
+                    ':token' => $token
+                ]);
+
+                // Redirige al usuario después de crear la cuenta
+                header('Location: login.php');
+                
+        } 
+    }
+}
+?>
+
+
+
+
+
 
 <!DOCTYPE html>
 <html lang="es">
